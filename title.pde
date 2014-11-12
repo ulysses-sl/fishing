@@ -43,14 +43,27 @@ class Title {
   
   void titleOn() {
     world.remove(boat);
+    for (FBox floater : goodFloaters) {
+        world.remove(floater);
+    }
+    for (FBox floater : badFloaters) {
+        world.remove(floater);
+    }
     fcounter.reset();
     titleScreen = true;
     textColor = 180;
   }
   
   void titleOff() {
+    for (FBox floater : goodFloaters) {
+        world.add(floater);
+    }
+    for (FBox floater : badFloaters) {
+        world.add(floater);
+    }
     titleScreen = false;
     boat.setVelocity(0, 0);
+    boat.resetForces();
     world.add(boat);
     boat.setPosition(width / 2, height / 2);
   }
